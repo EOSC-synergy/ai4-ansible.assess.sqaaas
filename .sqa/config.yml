@@ -1,0 +1,42 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/2.0.0
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/ai4os/ai4-ansible:
+      branch: master
+      repo: https://github.com/ai4os/ai4-ansible
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/ai4os/ai4-ansible git:
+        commands:
+        - /usr/bin/env sh .sqa/script.gloppy-aquamarine-reindeer.sh
+        container: qc.acc_nippy-jade-spaniel
+  QC.Doc:
+    repos:
+      github.com/ai4os/ai4-ansible find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-linen-ibis.sh
+        container: qc.doc_wiggy-buff-bear
+      github.com/ai4os/ai4-ansible git:
+        commands:
+        - /usr/bin/env sh .sqa/script.sunny-olivine-angora.sh
+        container: qc.doc_squirrely-puce-gecko
+  QC.Lic:
+    repos:
+      github.com/ai4os/ai4-ansible licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-magenta-bullfrog.sh
+        container: qc.lic_stinky-apricot-armadillo
+  QC.Ver:
+    repos:
+      github.com/ai4os/ai4-ansible get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lovely-plum-urchin.sh
+        container: qc.ver_flabby-aquamarine-kangaroo
+timeout: 5400
